@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta de Desacoplamiento: Web Off Zecore</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .section-title-style {
+            border-left: 4px solid #3b82f6; /* blue-500 */
+            padding-left: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header & Navbar -->
+    <header class="bg-white/90 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-xl font-bold text-gray-900">Web Off Zecore</a>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#resumen" class="text-gray-600 hover:text-blue-600 transition-colors">Resumen</a>
+                    <a href="#problema" class="text-gray-600 hover:text-blue-600 transition-colors">El Problema</a>
+                    <a href="#solucion" class="text-gray-600 hover:text-blue-600 transition-colors">La Solución</a>
+                    <a href="#servicios" class="text-gray-600 hover:text-blue-600 transition-colors">Servicios</a>
+                    <a href="#sincronizacion" class="text-gray-600 hover:text-blue-600 transition-colors">Sincronización</a>
+                    <a href="#transicion" class="text-gray-600 hover:text-blue-600 transition-colors">Transición</a>
+                </nav>
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-600 hover:bg-gray-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4">
+                <a href="#resumen" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100 rounded-md">Resumen</a>
+                <a href="#problema" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100 rounded-md">El Problema</a>
+                <a href="#solucion" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100 rounded-md">La Solución</a>
+                <a href="#servicios" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100 rounded-md">Servicios</a>
+                <a href="#sincronizacion" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100 rounded-md">Sincronización</a>
+                <a href="#transicion" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100 rounded-md">Transición</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6">
+        <!-- Hero Section -->
+        <section class="text-center py-20 sm:py-24">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 tracking-tight leading-tight">
+                    Propuesta de Desacoplamiento: Web Off Zecore
+                </h1>
+                <p class="mt-6 text-lg text-gray-600 max-w-3xl mx-auto">
+                    Una visión para desacoplar el Web Client de Zecore, mejorando la escalabilidad, resiliencia y agilidad a través de una Arquitectura Orientada a Eventos.
+                </p>
+            </div>
+        </section>
+
+        <!-- Sección 1: Resumen Ejecutivo -->
+        <section id="resumen" class="py-16">
+            <div class="max-w-5xl mx-auto">
+                 <h2 class="text-3xl font-bold text-gray-900 mb-12 section-title-style">Resumen Ejecutivo</h2>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="text-lg">
+                        <p class="mb-4">El proyecto busca resolver los problemas causados por el fuerte acoplamiento entre el <strong class="text-blue-600">Web Client</strong> y <strong class="text-purple-600">Zecore</strong>. Este acoplamiento genera cuellos de botella, limita el crecimiento y hace que el sistema sea frágil.</p>
+                        <p>La solución es adoptar una <strong class="text-green-600">Arquitectura Orientada a Eventos (EDA)</strong>, creando servicios más pequeños e independientes para mejorar la escalabilidad y la resiliencia.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Objetivos Clave</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <svg class="w-6 h-6 text-green-500 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span><strong class="font-semibold">Mejorar Independencia:</strong> Permitir que la web opere sin depender 100% de Zecore en tiempo real.</span>
+                            </li>
+                            <li class="flex items-start">
+                               <svg class="w-6 h-6 text-green-500 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span><strong class="font-semibold">Aumentar Escalabilidad:</strong> Soportar más usuarios y transacciones sin degradar el rendimiento.</span>
+                            </li>
+                            <li class="flex items-start">
+                               <svg class="w-6 h-6 text-green-500 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span><strong class="font-semibold">Incrementar Resiliencia:</strong> Aislar fallos para que un problema en un servicio no afecte a todo el sistema.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 2: El Problema Actual -->
+        <section id="problema" class="py-16 bg-gray-100 -mx-6 px-6">
+            <div class="max-w-5xl mx-auto">
+                 <h2 class="text-3xl font-bold text-gray-900 mb-2 section-title-style">El Problema: Acoplamiento Estrecho</h2>
+                 <p class="text-gray-600 mb-12 ml-5">La arquitectura actual presenta "puntos de dolor" críticos que afectan directamente al negocio y a la experiencia del usuario.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Card Problema 1 -->
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center border border-gray-200">
+                        <div class="bg-red-100 text-red-600 p-4 rounded-full inline-block mb-4">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536" /><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Cuellos de Botella</h3>
+                        <p class="text-gray-600">Las llamadas síncronas a Zecore limitan la capacidad total del sistema.</p>
+                    </div>
+                    <!-- Card Problema 2 -->
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center border border-gray-200">
+                        <div class="bg-red-100 text-red-600 p-4 rounded-full inline-block mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.83-5.83m11.42 15.17l-4.25-4.25a2.652 2.652 0 010-3.749 2.652 2.652 0 013.749 0l4.25 4.25M11.42 15.17L7.17 19.42m0-11.25L12.58 3.5a2.652 2.652 0 013.749 0 2.652 2.652 0 010 3.749L12.58 11.42" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Punto Único de Falla</h3>
+                        <p class="text-gray-600">Si Zecore falla, funciones críticas de la web dejan de funcionar.</p>
+                    </div>
+                    <!-- Card Problema 3 -->
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center border border-gray-200">
+                        <div class="bg-red-100 text-red-600 p-4 rounded-full inline-block mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.092 1.21-.138 2.43-.138 3.662m14.364 0c0 1.232-.046 2.453-.138 3.662a4.006 4.006 0 01-3.7 3.7 48.678 48.678 0 01-7.324 0 4.006 4.006 0 01-3.7-3.7c-.092-1.21-.138-2.43-.138-3.662m14.364 0a48.678 48.678 0 00-14.364 0" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Inconsistencia de Datos</h3>
+                        <p class="text-gray-600">Las fallas a mitad de un proceso generan datos inconsistentes.</p>
+                    </div>
+                    <!-- Card Problema 4 -->
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center border border-gray-200">
+                        <div class="bg-red-100 text-red-600 p-4 rounded-full inline-block mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Acoplamiento de Procesos</h3>
+                        <p class="text-gray-600">El frontend tiene demasiada responsabilidad, lo que lo vuelve frágil.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 3: La Solución Propuesta -->
+        <section id="solucion" class="py-16">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2 section-title-style">La Solución: Arquitectura Orientada a Eventos</h2>
+                <p class="text-gray-600 mb-12 ml-5">Pasar de un monolito acoplado a un ecosistema de microservicios independientes que se comunican de forma asíncrona.</p>
+                <div class="bg-white p-8 rounded-lg shadow-md border border-gray-200">
+                    <h3 class="text-2xl font-bold text-center mb-10">Evolución de la Arquitectura</h3>
+                    <div class="flex flex-col md:flex-row justify-around items-center space-y-8 md:space-y-0">
+                        <!-- Arquitectura Actual -->
+                        <div class="text-center">
+                            <h4 class="text-lg font-semibold text-red-600 mb-2">Actualmente</h4>
+                            <div class="diagram-box border-red-400">
+                                <div class="font-medium text-gray-800">Web Client</div>
+                                <div class="text-3xl my-2">↔️</div>
+                                <div class="font-medium text-gray-800">Zecore</div>
+                            </div>
+                            <p class="text-sm mt-2 text-red-500">Comunicación Síncrona</p>
+                        </div>
+                        
+                        <div class="text-gray-500 text-4xl font-bold mx-4 hidden md:block">→</div>
+                         <div class="text-gray-500 text-4xl font-bold my-4 block md:hidden transform rotate-90">→</div>
+
+                        <!-- Arquitectura Propuesta -->
+                        <div class="text-center">
+                             <h4 class="text-lg font-semibold text-green-600 mb-2">Propuesta</h4>
+                             <div class="diagram-box border-green-400">
+                                <div class="font-medium text-gray-800">Web Client</div>
+                                <div class="text-3xl my-1">↕️</div>
+                                <div class="font-medium text-blue-700">Nuevos Servicios</div>
+                                <div class="text-3xl my-1">↕️</div>
+                                <div class="font-medium text-purple-700">Zecore Connector</div>
+                                <div class="text-3xl my-1">↔️</div>
+                                <div class="font-medium text-gray-800">Zecore</div>
+                            </div>
+                            <p class="text-sm mt-2 text-green-500">Comunicación Asíncrona vía Eventos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sección 4: Nuevos Servicios -->
+        <section id="servicios" class="py-16 bg-gray-100 -mx-6 px-6">
+             <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2 section-title-style">Nuevos Servicios y Responsabilidades</h2>
+                <p class="text-gray-600 mb-12 ml-5">Se propone la creación y refactorización de varios servicios para dividir las responsabilidades y fomentar la independencia.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="text-xl font-bold text-blue-700">Customer Service</h3>
+                        <p class="mt-2 text-gray-600">Gestionará el ciclo de vida del cliente, su perfil y direcciones, de forma independiente a los "Leads" de Zecore.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="text-xl font-bold text-blue-700">Cart Service</h3>
+                        <p class="mt-2 text-gray-600">Gestionará carritos de compra activos, promociones y productos, sin depender del "Quotation" de Zecore.</p>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="text-xl font-bold text-blue-700">Orders Service (Nuevo)</h3>
+                        <p class="mt-2 text-gray-600">Orquestará todo el flujo del pedido, desde el pago hasta el envío, como corazón del proceso de compra.</p>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="text-xl font-bold text-blue-700">Inventory Service (Nuevo)</h3>
+                        <p class="mt-2 text-gray-600">Proporcionará información de stock casi en tiempo real, manteniendo una caché local.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 col-span-1 md:col-span-2 lg:col-span-1">
+                        <h3 class="text-xl font-bold text-purple-700">Zecore Connector (Nuevo)</h3>
+                        <p class="mt-2 text-gray-600">Actuará como "Capa Anti-Corrupción", traduciendo eventos entre la plataforma y Zecore.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sección 5: Estrategia de Sincronización -->
+        <section id="sincronizacion" class="py-16">
+             <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2 section-title-style">Estrategia de Sincronización de Datos</h2>
+                <p class="text-gray-600 mb-12 ml-5">Se implementará un enfoque de sincronización bidireccional para mantener los datos consistentes de forma eventual.</p>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Plataforma → Zecore</h3>
+                        <p class="font-medium mb-2 text-gray-600">Patrón "Transactional Outbox"</p>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-600">
+                            <li>El servicio guarda un cambio localmente.</li>
+                            <li>En la misma transacción, guarda el evento en una tabla "outbox".</li>
+                            <li>Un proceso separado publica el evento de forma fiable.</li>
+                            <li>El <strong class="text-purple-600">Zecore Connector</strong> consume y traduce el evento.</li>
+                        </ol>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Zecore → Plataforma</h3>
+                        <p class="font-medium mb-2 text-gray-600">Captura de Datos de Cambios (CDC)</p>
+                         <ol class="list-decimal list-inside space-y-2 text-gray-600">
+                            <li>Se usan "ganchos" (hooks) en Zecore para detectar cambios.</li>
+                            <li>Zecore emite un evento cuando un dato cambia.</li>
+                            <li>Los servicios de la plataforma se suscriben y actualizan sus cachés locales.</li>
+                         </ol>
+                    </div>
+                </div>
+                 <div class="mt-8 text-center p-6 bg-yellow-100 rounded-lg">
+                     <h3 class="text-xl font-semibold text-yellow-800">Principio Clave: Consistencia Eventual</h3>
+                     <p class="text-yellow-700 mt-2">Los datos no se actualizarán instantáneamente. Este es un sacrificio deliberado para ganar <strong class="font-semibold">mayor disponibilidad y rendimiento</strong>.</p>
+                 </div>
+            </div>
+        </section>
+        
+        <!-- Sección 6: Plan de Transición -->
+        <section id="transicion" class="py-16 bg-gray-100 -mx-6 px-6">
+             <div class="max-w-5xl mx-auto">
+                 <h2 class="text-3xl font-bold text-gray-900 mb-2 section-title-style">Plan de Transición por Fases</h2>
+                <p class="text-gray-600 mb-12 ml-5">La implementación se hará por fases para minimizar riesgos, asegurando una migración controlada y segura.</p>
+                 <div class="bg-white p-8 rounded-lg shadow-md border border-gray-200">
+                     <ol class="relative border-l-2 border-blue-500">
+                        <li class="mb-10 ml-8">
+                            <span class="absolute flex items-center justify-center w-8 h-8 bg-blue-500 rounded-full -left-4 ring-8 ring-white">
+                                <svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" /><path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a.772.772 0 0 1 0-1.113ZM12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" clip-rule="evenodd" /></svg>
+                            </span>
+                            <h3 class="flex items-center mb-1 text-xl font-semibold text-gray-900">Fase 1: Lanzamiento Oscuro (Shadowing)</h3>
+                            <p class="text-base font-normal text-gray-600">Desplegar los nuevos servicios en producción sin que los usuarios los usen. Se copia el tráfico real para probar su comportamiento y validar la lógica sin afectar al sistema actual.</p>
+                        </li>
+                         <li class="mb-10 ml-8">
+                            <span class="absolute flex items-center justify-center w-8 h-8 bg-blue-500 rounded-full -left-4 ring-8 ring-white">
+                                <svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M11.47 2.47a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1-1.06 1.06l-2.22-2.22V11.25a.75.75 0 0 1-1.5 0V4.94L8.78 7.28a.75.75 0 0 1-1.06-1.06l3.75-3.75ZM12.75 12.75a.75.75 0 0 1 .75.75v6.52l2.22-2.22a.75.75 0 0 1 1.06 1.06l-3.75 3.75a.75.75 0 0 1-1.06 0l-3.75-3.75a.75.75 0 1 1 1.06-1.06l2.22 2.22V13.5a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd" /></svg>
+                            </span>
+                            <h3 class="mb-1 text-xl font-semibold text-gray-900">Fase 2: Migración de Lecturas</h3>
+                            <p class="text-base font-normal text-gray-600">Lanzar el nuevo <strong class="font-semibold">Inventory Service</strong> y modificar la web para que lea el stock de este servicio en vez de Zecore, obteniendo una ganancia de rendimiento y resiliencia rápidamente.</p>
+                        </li>
+                         <li class="ml-8">
+                             <span class="absolute flex items-center justify-center w-8 h-8 bg-blue-500 rounded-full -left-4 ring-8 ring-white">
+                                <svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M16.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 0 1 1.06-1.06l7.5 7.5Z" clip-rule="evenodd" /></svg>
+                            </span>
+                            <h3 class="mb-1 text-xl font-semibold text-gray-900">Fases Futuras: Migración Gradual</h3>
+                            <p class="text-base font-normal text-gray-600">Continuar migrando cada parte del proceso (Submit de compra, creación de carritos, etc.) de forma independiente, lanzando cambios pequeños y controlados.</p>
+                        </li>
+                    </ol>
+                 </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200">
+        <div class="container mx-auto px-6 py-6 text-center text-gray-500">
+            <p>&copy; 2024 - Propuesta de Desacoplamiento Web Off Zecore</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuLinks = mobileMenu.getElementsByTagName('a');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when a link is clicked
+        for (let i = 0; i < mobileMenuLinks.length; i++) {
+            mobileMenuLinks[i].addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        }
+    </script>
+</body>
+</html>
